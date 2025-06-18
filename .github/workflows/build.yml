@@ -36,6 +36,7 @@ jobs:
           - aarch64
           - arm
           - riscv64gc
+          - xuantie
 
     steps:
       - name: ⬇️ checkout
@@ -85,7 +86,8 @@ jobs:
           export XMAKE_ROOT=y # Only need to use "--root" in CI
           xmake --version
           source env.sh
-          pushd apps/${{ matrix.app }}
+          pushd apps
+            echo "includes(path.join(path.join(os.scriptdir(), \"${{ matrix.app }}\"), \"xmake.lua\"))" > xmake.lua
             xmake f -a x86_64 --target_os=linux -vyD
             xmake -j$(nproc) -vyD -P .
           popd

@@ -45,7 +45,11 @@ jobs:
           submodules: true
 
       - name: ⬇️ install xmake
-        uses: xmake-io/github-action-setup-xmake@v1
+        shell: bash
+        run: |
+          wget -q https://github.com/xmake-io/xmake/releases/download/v2.8.7/xmake-v2.8.7.gz.run
+          sudo chmod 777 ./xmake-v2.8.7.gz.run
+          ./xmake-v2.8.7.gz.run
 
       - name: 👷 build
         shell: bash
